@@ -1,0 +1,23 @@
+def int_to_bytes(i: int) -> bytes:
+    # Compute minimum number of bytes needed to represent i
+    length = (i.bit_length() + 7) // 8
+    return i.to_bytes(length, 'big')
+
+def main():
+    # Given parameters
+    n = 110581795715958566206600392161360212579669637391437097703685154237017351570464767725324182051199901920318211290404777259728923614917211291562555864753005179326101890427669819834642007924406862482343614488768256951616086287044725034412802176312273081322195866014802176312273081322195866046098595306261781788276570920467840172004530873767
+    e = 1
+    ct = 44981230718212183604274785925793145442655465025264554046028251311164494127485
+
+    pt_int = ct
+
+    flag_bytes = int_to_bytes(pt_int)
+    try:
+        flag = flag_bytes.decode()
+    except UnicodeDecodeError:
+        flag = flag_bytes.rstrip(b'\x00').decode()
+
+    print("Recovered flag:", flag)
+
+if __name__ == "__main__":
+    main()
